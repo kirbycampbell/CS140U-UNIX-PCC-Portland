@@ -1,0 +1,34 @@
+1).What are the names of the parts of a UNIX command? List them, and give a brief description of each.
+
+There are commands, which are just small programs pre-built into Unix. 
+The Command-line is space where the user types, and the OS responds via text. 
+There's arguments, which act as variables on the commands.  
+The command also has a directory, which is the location on the harddrive in which the commands are situated at that moment. 
+Also there is the prompt, which tells the user it's ready for input... commonly shown as $ or %. 
+
+
+2).Can multiple UNIX commands be typed on the same single command line? Explain how.
+
+Yes, you can string multiple commands together by placing an empty space, a pipe ("|") and 
+then another space, followed by the next command as many times as youd like.
+
+3).Write names of the main hardware components of a contemporary computer system.
+
+Current computer systems consist of a Motherboard, CPU(Central Processing Unit, RAM, 
+Storage (SSD usually), PSU(Power Supply Unit), Graphics Card, Sound Card, Keyboard, 
+Mouse, Monitor, Speakers, and many ports (Usb, hdmi, etc...)
+
+4).What system was the immediate predecessor of UNIX? Where was this predecessor and UNIX itself initially developed, and by whom?
+
+MULTICS was the immediate predecessor of UNIX, and it was initially developed by 
+Bell Laboratories, GE, and MIT. It was developed by Dennis Ritchie, Ken Thompson, and others.
+
+5).Where did the three main branches of UNIX development take birth? Name two systems from the commercial branch and one from the academic branch of UNIX development.
+
+The Original Unix Operating System was created at Bell Labs. 
+It was then licensed to many colleges, which lead to CSRG making changes that 
+then became known as the Berkeley Software Distribution (BSD). 
+AT&T also made their own version called the System V (SVR4).  
+The Commercial versions were Bell Lab's Original, AT&T's System V, 
+and what later became macOS.
+The Academic Version was the BSD from Berkeley College.

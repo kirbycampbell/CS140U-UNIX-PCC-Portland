@@ -1,0 +1,143 @@
+Kirby Campbell
+February 23, 2019
+CS140U Morale - Assignment 5
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+:::::::::::::::::::::::::Assignment 5::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+1. What is the difference between built-in (internal) and external shell commands? How does a UNIX shell execute built-in and external commands? Explain your answer with an example.
+
+Built-in (internal) shell commands run faster and are built into the shell itself, meaning the shell doesn't have to search for the given path for the command. External Commands are not built into the shell and the shell has to look for the command's path given in PATH variable, causing a new process to be spawned to execute the command. 
+
+Example log:
+kirby.campbell@syccuxas01:~> type echo
+echo is a shell builtin
+kirby.campbell@syccuxas01:~> type cat
+cat is /usr/bin/cat    //Which means it is external
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+2. What is the purpose of the ps command? Give an example use of the command.
+
+ The ps command lists the current processes of the Linux shell.  You can use this to see background processes, system wide processes, or just the processes the user (owner) themself is running.
+
+Example:
+kirby.campbell@syccuxas01:~> ps -x
+  PID TTY      STAT   TIME COMMAND
+ 7541 ?        Ss     0:00 /usr/lib/systemd/systemd --user
+ 7542 ?        S      0:00 (sd-pam)
+ 7543 ?        S      0:00 sshd: kirby.campbell@pts/12
+ 7544 pts/12   Ss     0:00 -bash
+ 7765 pts/12   R+     0:00 ps -x
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+3. What is the purpose of the nice command in UNIX?
+
+ The nice command changes the priority of a command. A normal user may use the nice command to lower the priority of a command, but a user with root privileges can increase priority of a command. 
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+4. Give the sequence of steps (with commands) for terminating a background process.
+
+ If a background process is running:
+1). Use ps to find the PID of of the background process
+2). Use kill PID   to terminate the background process.
+Example:
+kirby.campbell@syccuxas01:~> ps -x &
+[1] 8823
+kirby.campbell@syccuxas01:~>   PID TTY      STAT   TIME COMMAND
+ 7541 ?        Ss     0:00 /usr/lib/systemd/systemd --user
+ 7542 ?        S      0:00 (sd-pam)
+ 7543 ?        S      0:00 sshd: kirby.campbell@pts/12
+ 7544 pts/12   Ss+    0:00 -bash
+ 8823 pts/12   R      0:00 ps -x
+
+~> kill 8823
+-bash: kill: (8823)
+[1]+  Done                    ps -x
+
+This kills the background ps process itself.  Two birds with one stone.
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+5. Show the command for displaying the process tree on your system for
+a. ALL the processes running on your system
+
+kirby.campbell@syccuxas01:~> ps -A
+  PID TTY          TIME CMD
+    1 ?        00:00:04 systemd
+    2 ?        00:00:00 kthreadd
+    3 ?        00:00:08 ksoftirqd/0
+    5 ?        00:00:00 kworker/0:0H
+    7 ?        00:00:00 migration/0
+    8 ?        00:00:00 rcuc/0
+    9 ?        00:00:00 rcub/0
+   10 ?        00:00:03 rcu_preempt
+   11 ?        00:00:03 rcuop/0
+   12 ?        00:00:03 rcuop/1
+   13 ?        00:00:00 rcu_bh
+   14 ?        00:00:00 rcuob/0
+   15 ?        00:00:00 rcuob/1
+   16 ?        00:00:00 rcu_sched
+   17 ?        00:00:00 rcuos/0
+
+b. all of YOUR processes running on the system
+
+kirby.campbell@syccuxas01:~> ps -ukirby.campbell
+  PID TTY          TIME CMD
+ 7541 ?        00:00:00 systemd
+ 7542 ?        00:00:00 (sd-pam)
+ 7543 ?        00:00:00 sshd
+ 7544 pts/12   00:00:00 bash
+ 8920 pts/12   00:00:00 ps
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+6. Explain what are well-known ports (some googling on this one)? What well-known ports numbers are the following services offered: http, ftp, telnet, smtp, ssh?
+
+Well known ports are defined by IANA and is used by Red Hat Enterprise Linux as default communication ports for services like ftp, ssh, telnet, and http.  They can be found by leaving your user directory by typing cd .. multiple times, until you can ls and see the etc directory. cd into etc and then type vim services.  That will open the full list of ports.
+
+http: port 80
+ftp: port 21  or port 115 for sftp (secure ftp)
+telnet: port 23
+smtp: port 25
+ssh: port 22
+ 
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+7. What command(s) would you use to display information about the CPU and OS on your UNIX host?
+
+CPU:
+kirby.campbell@syccuxas01:~> cat /proc/cpuinfo
+processor       : 0
+vendor_id       : GenuineIntel
+cpu family      : 6
+model           : 45
+model name      : Intel(R) Xeon(R) CPU E5-2660 0 @ 2.20GHz
+
+OS:
+kirby.campbell@syccuxas01:~> cat /proc/osinfo
+cat: /proc/osinfo: No such file or directory
+kirby.campbell@syccuxas01:~> cat /proc/cpuinfocat /etc/os-release
+cat: /proc/cpuinfocat: No such file or directory
+NAME=openSUSE
+VERSION="13.1 (Bottle)"
+VERSION_ID="13.1"
+PRETTY_NAME="openSUSE 13.1 (Bottle) (x86_64)"
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+8. How would you display information about the user chris at the host mit.edu using the finger command?
+
+kirby.campbell@syccuxas01:~> finger chris@mit.edu
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+9. What is anonymous ftp? How would you establish an anonymous ftp session with the host ftp.intel.com?
+
+An anonymous ftp is a file transfer protocol that gives users access to files where there is no need to identify themselves to gain access.  The user ID can be entered as "anonymous" and password is anything. It's a way to make files publicly available. 
+
+kirby.campbell@syccuxas01:~> ftp ftp.intel.com
+Connected to ftp-ext.cps.intel.com.
+220 Microsoft FTP Service
+Name (ftp.intel.com:kirby.campbell): anonymous
+331 Anonymous access allowed, send identity (e-mail name) as password.
+Password: kirby.campbell@pcc.edu
+230-Welcome to ftp.intel.com!
+ 
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+10. What is the purpose of ssh command?
+
+The ssh command securely (encrypted) runs a program or will open a shell on a remote system. The syntax is ssh nameOfHost   . Once logged in you will see the remote system's shell prompt where you can run commands on the host.  type exit to exit the ssh. If you include a command in your initial ssh nameOfHost command   then it will run the connect, run command, and log out all in one line. 
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::

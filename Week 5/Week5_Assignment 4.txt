@@ -1,0 +1,125 @@
+Kirby Campbell
+February 7, 2019
+CS140u - Morales
+
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+	Assignment 4
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+1). Create this sample file, you can call it student grades
+John    Doe     3.54    ECE
+James   Davis    3.71    ECE
+Al      Davis    2.63    CS
+Ahmad   Rashid  3.74    MBA
+Sam     Chu      3.68    ECE
+Arun    Roy      3.06    SS
+Rick    Marsh   2.34    CS
+James   Adam    2.77    CS
+Art     Pohm    4.00    ECE
+John    Clark    2.68    ECE
+Nabeel  Ali     3.56    EE
+Tom     Nelson  3.81    ECE
+Pat     King    2.77    SS
+Jake    Zulu    3.00    CS
+John    Lee     2.64    EE
+Sunil   Raj     3.36    ECE
+Charles Right   3.31    EECS
+Diane   Rover   3.87    ECE
+Aziz    Inan    3.75    EECS
+Lu      John    3.06    CS
+Lee     Chow    3.74    EE
+Adam    Giles   2.54    SS
+Andy    John    3.98    EECS
+
+The file above contains student records. Use a command line to display the records for the top five students in descending (sorted) order, i.e., with the highest GPA student’s record displayed first. Show your session
+
+
+kirby.campbell@syccuxas01:~> sort -nrk3 studentGrades|head -n 5
+Art     Pohm    4.00    ECE
+Andy    John    3.98    EECS
+Diane   Rover   3.87    ECE
+Tom     Nelson  3.81    ECE
+Aziz    Inan    3.75    EECS
+
+
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+2). Create sample files lab1, lab2, lab3 and lab4. They can be created using vi, or doing something like who > lab1, etc. Once you have created the file, display its content with the cat command. Show your session.
+
+kirby.campbell@syccuxas01:~> touch lab1 lab2 lab3 lab4
+kirby.campbell@syccuxas01:~> echo "Hello There" >> lab1
+kirby.campbell@syccuxas01:~> cat lab1
+Hello There
+kirby.campbell@syccuxas01:~> echo "Howre you file 2?" >> lab2
+kirby.campbell@syccuxas01:~> cat lab2
+Howre you file 2?
+kirby.campbell@syccuxas01:~> echo "No questions here..." >> lab3
+kirby.campbell@syccuxas01:~> cat lab3
+No questions here...
+kirby.campbell@syccuxas01:~> echo "Successful implementation" >> lab4
+kirby.campbell@syccuxas01:~> cat lab4
+Successful implementation
+
+Combine the lab files: lab1, lab2, lab3, and lab4 appending them >>  to a file called all.labs  . Any errors (pretend one of those lab files do not exist) should be redirected to an error.log file. Since you will have all the files, once you redirect the error 2>, assume that you do not have one of the files that consequently would generate an error, in this case the error.log file will be empty, but to build the command include the 2> as if one of the files did not exist. This whole command will be in one line.  Show your session.
+
+kirby.campbell@syccuxas01:~> cat lab1 lab2 lab3 lab4 >> all.labs 2> error.log
+kirby.campbell@syccuxas01:~> cat all.labs
+Hello There
+Howre you file 2?
+No questions here...
+Successful implementation
+kirby.campbell@syccuxas01:~> cat error.log
+kirby.campbell@syccuxas01:~>
+
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+3). How many soft links are there in the /usr directory. Show the command and its output.
+
+kirby.campbell@syccuxas01:~> ls -l /usr | gawk '{softlinks += $2} END {print softlinks}'
+1005
+
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+Create a file named students containing the following data in your current directory. Each line in this file represents a student's first name, last name, and 3 exam scores. Each line should be regarded as a record containing 5 fields separated by one or more tab characters. You must use the awk command to answer the questions below
+
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+4). Use AWK. What command line would display the contents of students file such that first names and last names are swapped?
+
+kirby.campbell@syccuxas01:~> awk '{print $2, $1, $3, $4, $5}' students
+Jones Tom 100 90 80
+Jones Nancy 70 80 90
+Sims Terry 55 65 75
+Terry John 75 76 77
+Maier Ruth 100 100 100
+Wolfe Mike 90 95 98
+Cole Dennis 70 80 89
+Maier Ron 90 85 89
+Miller Susan 65 80 90
+Bill Mad 75 65 77
+
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+5). Use AWK. What command line would display the first and last names of those who got 100 on their first exam (there are examples in the book)?
+
+kirby.campbell@syccuxas01:~> awk '"100" == $3 {print $1, $2}' students
+Tom Jones
+Ruth Maier
+
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+6). Use AWK. What command line would display the contents of the students file with line numbers in front of each line?
+
+kirby.campbell@syccuxas01:~> awk '{print NR, $0}' students
+1 Tom Jones 100 90 80
+2 Nancy Jones 70 80 90
+3 Terry Sims 55 65 75
+4 John Terry 75 76 77
+5 Ruth Maier 100 100 100
+6 Mike Wolfe 90 95 98
+7 Dennis Cole 70 80 89
+8 Ron Maier 90 85 89
+9 Susan Miller 65 80 90
+10 Mad Bill 75 65 77
+
+

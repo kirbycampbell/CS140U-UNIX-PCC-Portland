@@ -1,0 +1,139 @@
+Kirby Campbell
+January 28, 2019
+Assignment 3 CS140U
+
+1. Give three different commands to get back to your home directory.
+
+cd
+cd ~
+cd /home/student/kirby.campbell
+
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+2. Show the names of all hidden files in your home directory. Show your session.
+
+kirby.campbell@syccuxas01:~> ls -d .*
+.              .config           .inputrc         .sampletester.swp
+..             .dead.letter.swp  .local           .viminfo
+.addressbook   .emacs            .myTestFile.swp  .xim.template
+.bash_history  .fonts            .pinerc          .xinitrc.template
+.bashrc        .gnu-emacs        .profile
+
+can also do ls -Ad .* to retain color formatting.  
+Or can do ls -a | grep '^\.' to get each file in a single line.
+
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+3. Write down the following and show the session that you used to obtain the required information:
+
+	a. Your user name (also known as login name)
+
+		kirby.campbell@syccuxas01:~> whoami
+		kirby.campbell
+
+	b. Your user ID
+	
+		kirby.campbell@syccuxas01:~> id -u
+		8135
+
+	c. Your group ID and group name
+
+		kirby.campbell@syccuxas01:~> groups && id -g
+		students
+		1003
+
+	d. User names of users in your group
+		
+		kirby.campbell@syccuxas01:~> getent group students
+students:x:1003:aaron.brown14,aaron.fifer,aaron.herinckx,aaron.leondar,aaron.miller5,aaron.squier,abdallah.nawras,abdel.ouedraogo,abdi.sharif1,abdikadir.musa,abdoul.ouedraogo,abdulhai.mohammednur,abdullah.alshawa,abdullah.barghouti,abdullah.luay,abdulrahman.adnan,abie.jones,adaclari............etc
+
+	e. Number of groups that you are a member of
+
+		kirby.campbell@syccuxas01:~> groups
+		students
+
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+ 
+4. What are the permissions for your home directory (~) (not the directory /home or the individual files in your home directory), set by your system administrator? What command did you use to answer the question? Show your session.
+
+drwxr-xr-x which means that the file is a directory. I (owner) have the ability to read/write/execute.
+Group can Read/Execute, and Others can Read/Execute.
+
+kirby.campbell@syccuxas01:~> ls -ld
+drwxr-xr-x 10 kirby.campbell students 4096 Jan 30 17:53 .
+
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+5. Suppose that you want to block everyone (except you) at the main door (your ~ directory) of your directory hierarchy (i.e., your home directory-not the files inside the directory), as shown in Figure Lab7.1 (below). Take the necessary steps to do this. Show the session that you used to accomplish the task and confirm that the task has actually been done.
+
+kirby.campbell@syccuxas01:~> chmod 700 ~
+kirby.campbell@syccuxas01:~> ls -ld ~
+drwx------ 10 kirby.campbell students 4096 Jan 30 17:53 /home/student/kirby.campbell
+
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+6. What do . (dot), .. (dotdot), and ~ represent in UNIX? Show use of all three.
+
+. is the current directory, .. is the parent directory, and ~ is the home directory of the user.
+
+kirby.campbell@syccuxas01:~> ls -ld .
+drwx------ 10 kirby.campbell students 4096 Jan 30 17:53 .
+kirby.campbell@syccuxas01:~> ls -ld ..
+drwxr-xr-x 5609 root root 131072 Jan 16 07:04 ..
+kirby.campbell@syccuxas01:~> ls -ld ~
+drwx------ 10 kirby.campbell students 4096 Jan 30 17:53 /home/student/kirby.campbell
+
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+7. What is an inode number in UNIX? Show the command for displaying the inode numbers for the root directory (/) and your home directory (~) (not the directory called /home or the individual files inside your home directory).
+
+An inode number is a data structure in Unix file systems that store basic info about a file, firectory, or other system object.
+
+kirby.campbell@syccuxas01:~> ls -i /
+ 388611 bin        12 lib          389046 opt          389220 selinux
+      2 boot   388634 lib64             1 proc         388850 srv
+   1025 dev        11 lost+found  2590721 Quarantine        1 sys
+ 129537 etc   1813505 McAfee       388755 root         389223 tmp
+      2 home   389044 media          3563 run             119 usr
+1683969 isec   389045 mnt          388757 sbin         259075 var
+
+kirby.campbell@syccuxas01:~> ls -i ~
+7233729 bin          7230854 myTestFile    7233944 something
+7230731 dead.letter  7233732 public_html   7233966 temp
+7230729 filename     7230735 sampleemail   7230736 week3answersKirby
+7230856 ls           7230737 sampletester
+7233945 Mail         7230726 sample.txt
+
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+8. Give the command for removing an empty directory called personal under your home directory. How would you remove it if the personal directory is not empty?
+
+if empty: kirby.campbell@syccuxas01:~> rmdir personal
+if personal contained files: kirby.campbell@syccuxas01:~> rm -r ~/personal
+
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+9. Create a file, called sample, in your home directory and set its permissions to read and write for yourself, read for users in your group, and none to everyone else. What command did you use to create the file? What command did you use to set privileges?
+
+kirby.campbell@syccuxas01:~> touch sample
+kirby.campbell@syccuxas01:~> chmod 640 ~/sample
+
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+10. Suppose that umask is set to 022 on a system. What will be the default permissions for the new directories and text files that you create? Explain your answer.
+
+When unmask is set to 022 on a system it means by default new directories and text files will have these permissions:
+directory: drwxr-xr-x
+file: -rwxr-xr-x
+This means by default the owner can read/write/execute files, group can read and execute, and others can read and execute as well.
+
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+11. Assume that you have two files, f1 and f2, that you want to concatenate and store in a file called f1nf2. Show the cat command needed to perform this task. Now show the cat command (concatenate) needed to put your name, taken from the keyboard, as the last line of f1nf2.
+
+kirby.campbell@syccuxas01:~> touch f1nf2
+kirby.campbell@syccuxas01:~> cat f1 f2 >> f1nf2
+kirby.campbell@syccuxas01:~> cat kirby >> f1nf2
+kirby.campbell@syccuxas01:~> echo kirby >> f1nf2
+
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::

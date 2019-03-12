@@ -1,0 +1,176 @@
+Kirby Campbell
+CS140U Morales - Lab 6
+February 17, 2019
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+$ ps ax
+
+This Command lists all process information on the system except for those from process group leaders, and lists all processes without controlling terminals.
+
+kirby.campbell@syccuxas01:~> ps ax
+  PID TTY      STAT   TIME COMMAND
+    1 ?        Ss     8:11 /sbin/init showopts
+    2 ?        S      0:01 [kthreadd]
+    3 ?        S      1:34 [ksoftirqd/0]
+    5 ?        S<     0:00 [kworker/0:0H]
+    7 ?        S      0:52 [migration/0]
+    8 ?        S      0:00 [rcuc/0]
+    9 ?        S      0:00 [rcub/0]
+   10 ?        S      9:42 [rcu_preempt]
+
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+$ ps –ef
+
+This command shows active system processes but with UID and a "full" listing of header info. 
+
+kirby.campbell@syccuxas01:~> ps -ef
+UID        PID  PPID  C STIME TTY          TIME CMD
+root         1     0  0 Jan04 ?        00:08:10 /sbin/init showopts
+root         2     0  0 Jan04 ?        00:00:01 [kthreadd]
+root         3     2  0 Jan04 ?        00:01:34 [ksoftirqd/0]
+root         5     2  0 Jan04 ?        00:00:00 [kworker/0:0H]
+root         7     2  0 Jan04 ?        00:00:52 [migration/0]
+root         8     2  0 Jan04 ?        00:00:00 [rcuc/0]
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+$ ps aux
+
+This command is similar to ps ax command but with USER info.  This shows USER who runs the process, process ID, amount CPU and MEM the process is using, Virtual Memory Size, RSS (Physical Mem used) and when it was started. 
+
+kirby.campbell@syccuxas01:~> ps aux
+USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+root         1  0.0  0.1  39912  4492 ?        Ss   Jan04   8:10 /sbin/init show
+root         2  0.0  0.0      0     0 ?        S    Jan04   0:01 [kthreadd]
+root         3  0.0  0.0      0     0 ?        S    Jan04   1:34 [ksoftirqd/0]
+root         5  0.0  0.0      0     0 ?        S<   Jan04   0:00 [kworker/0:0H]
+root         7  0.0  0.0      0     0 ?        S    Jan04   0:52 [migration/0]
+root         8  0.0  0.0      0     0 ?        S    Jan04   0:00 [rcuc/0]
+root         9  0.0  0.0      0     0 ?        S    Jan04   0:00 [rcub/0]
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+$ps –ef f
+
+Lists all system processes with "full" header and UID but is modified with f output modifier which shows ASCII-art process hierarchy (forest).
+
+kirby.campbell@syccuxas01:~> ps -ef f
+UID        PID  PPID  C STIME TTY      STAT   TIME CMD
+root         2     0  0 Jan04 ?        S      0:01 [kthreadd]
+root         3     2  0 Jan04 ?        S      1:34  \_ [ksoftirqd/0]
+root         5     2  0 Jan04 ?        S<     0:00  \_ [kworker/0:0H]
+root         7     2  0 Jan04 ?        S      0:52  \_ [migration/0]
+root         8     2  0 Jan04 ?        S      0:00  \_ [rcuc/0]
+root         9     2  0 Jan04 ?        S      0:00  \_ [rcub/0]
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+$ ps -f -u kirby.campbell <<< it can be user userid
+
+This command lists all processes in full listing format for the user indicated.  I changed it to kirby.campbell since wmorales was returning nothing.
+
+kirby.campbell@syccuxas01:~> ps -f -u kirby.campbell
+UID        PID  PPID  C STIME TTY          TIME CMD
+kirby.c+  3851     1  0 16:46 ?        00:00:00 /usr/lib/systemd/systemd --user
+kirby.c+  3852  3851  0 16:46 ?        00:00:00 (sd-pam)
+kirby.c+  3854  3826  0 16:46 ?        00:00:00 sshd: kirby.campbell@pts/29
+kirby.c+  3855  3854  0 16:46 pts/29   00:00:00 -bash
+kirby.c+  4951  3855  0 16:52 pts/29   00:00:00 ps -f -u kirby.campbell
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+$ ps aux --sort=-pcpu,+pmem
+
+This command lists all system processes including USER info including processes without controlling ttys.  Then it is sorted by CPU usage in descending order and MEM in ascending order.
+
+kirby.campbell@syccuxas01:~> ps aux --sort=-pcpu,+pmem
+USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+root      2003  5.5  0.5 288884 22824 ?        Ssl  Jan04 3516:48 /usr/lib/accou
+root      1571  1.8  8.1 421100 331852 ?       S    Jan04 1145:38 python /usr/bi
+gdm      12300  1.1 13.8 2148160 563248 ?      Sl   Feb13  65:39 gnome-shell --m
+root      2257  0.4  0.4 1256580 19344 ?       Ssl  Jan04 284:20 /opt/isec/ens/t
+root     13622  0.3  8.6 1764324 349752 ?      Sl   08:28   1:37 /opt/isec/ens/t
+michell+  3722  0.2  0.1  47460  6984 pts/65   S+   16:45   0:01 vim introductio
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+$ ps aux --sort=-pcpu | head -5
+
+This command lists all system processes including USER info and including processes without controlling ttys, then is sorted in descending order by CPU usage, and is piped to only output the first five lines of output.
+
+kirby.campbell@syccuxas01:~> ps aux --sort=-pcpu | head -5
+USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+root      2003  5.5  0.5 288884 22824 ?        Ssl  Jan04 3516:39 /usr/lib/accounts-daemon
+root      1571  1.8  8.1 421100 331852 ?       S    Jan04 1145:38 python /usr/bin/denyhosts.py --daemon --config=/usr/share/denyhosts/denyhosts.cfg
+gdm      12300  1.1 13.8 2148160 563248 ?      Sl   Feb13  65:39 gnome-shell --mode=gdm
+root      2257  0.4  0.4 1256580 19344 ?       Ssl  Jan04 284:20 /opt/isec/ens/threatprevention/bin/isectpd
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+$ ps -f --forest
+
+Lists full listing of system processes formatted by ASCII art process tree, which formats CMD elements in a hierarchial format.
+
+UID        PID  PPID  C STIME TTY          TIME CMD
+kirby.c+  3855  3854  0 16:46 pts/29   00:00:00 -bash
+kirby.c+  6004  3855  0 16:54 pts/29   00:00:00  \_ ps -f --forest
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+$ ps -e -o pid,uname,pcpu,pmem,comm
+
+kirby.campbell@syccuxas01:~> ps -e -o pid,uname,pcpu,pmem,comm
+  PID USER     %CPU %MEM COMMAND
+    1 root      0.0  0.1 systemd
+    2 root      0.0  0.0 kthreadd
+    3 root      0.0  0.0 ksoftirqd/0
+    5 root      0.0  0.0 kworker/0:0H
+    7 root      0.0  0.0 migration/0
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+$ ps -e -o pid,uname=USERNAME,pcpu=CPU_USAGE,pmem,comm
+
+Lists and selects all processes and is formatted by the -o by PID uname(formatted as USERNAME), pcpu(formatted as CPU_USAGE), MEM, and Command. The -o specifies the user format following it. 
+
+kirby.campbell@syccuxas01:~> ps -e -o pid,uname=USERNAME,pcpu=CPU_USAGE,pmem,comm
+  PID USERNAME CPU_USAGE %MEM COMMAND
+    1 root           0.0  0.1 systemd
+    2 root           0.0  0.0 kthreadd
+    3 root           0.0  0.0 ksoftirqd/0
+    5 root           0.0  0.0 kworker/0:0H
+    7 root           0.0  0.0 migration/0
+    8 root           0.0  0.0 rcuc/0
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+$ ps -e -o pid,comm,etime
+
+Lists and selects all processes and is formatted by the -o command with PID COMMAND and ELAPSED.  The -o specifies the user format following it. 
+
+kirby.campbell@syccuxas01:~> ps -e -o pid,comm,etime
+  PID COMMAND             ELAPSED
+    1 systemd         43-20:14:39
+    2 kthreadd        43-20:14:39
+    3 ksoftirqd/0     43-20:14:39
+    5 kworker/0:0H    43-20:14:39
+    7 migration/0     43-20:14:39
+    8 rcuc/0          43-20:14:39
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+$ watch -n 1 'ps -e -o pid,uname,cmd,pmem,pcpu --sort=-pmem,-pcpu | head -15'
+
+The beginning of this command tells the output to format in full screen, while the -n 1 sets the view to update every 1 second. Next the ps command is what will be shown, selecting all processes, and then formatting it with custom user choice (-o).  It will be formatted with PID, USER, CMD, MEM, and CPU.  Then the output is sorted in descending order of MEM usage and descending order of CPU usage. Finally it only shows the top 15 lines on this page. 
+
+kirby.campbell@syccuxas01:~> watch -n 1 'ps -e -o pid,uname,cmd,pmem,pcpu --sort=-pmem,-pcpu | head -15'
+Every 1.0s: ps -e -o pid,uname,cmd,pmem,pcpu --sort=...  Sun Feb 17 16:56:59 2019
+
+  PID USER     CMD                         %MEM %CPU
+ 2299 vscan    /usr/sbin/clamd             15.5  0.0
+12300 gdm      gnome-shell --mode=gdm      13.8  1.1
+ 2298 root     /opt/isec/ens/threatprevent  8.6  0.0
+13622 root     /opt/isec/ens/threatprevent  8.6  0.3
+13606 root     /opt/isec/ens/threatprevent  8.4  0.0
+ 1571 root     python /usr/bin/denyhosts.p  8.1  1.8
+ 2281 root     gdm-session-worker [pam/gdm  2.6  0.0
+ 1161 root     /usr/sbin/rsyslogd -n        0.7  0.0
+ 2003 root     /usr/lib/accounts-daemon     0.5  5.5
+ 2257 root     /opt/isec/ens/threatprevent  0.4  0.4
+ 1915 root     /usr/sbin/snmpd -r -A -LF n  0.4  0.0
+  410 root     /usr/lib/systemd/systemd-jo  0.4  0.0
+32585 jared.c+ valgrind --vgdb=yes --vgdb-  0.3  0.0
+ 2106 swiagent /opt/SolarWinds/Agent/bin/P  0.3  0.1
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::

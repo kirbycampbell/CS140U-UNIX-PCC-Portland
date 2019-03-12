@@ -1,0 +1,47 @@
+Kirby Campbell
+1-10-2019
+Lab 1
+
+
+1- Make sure that you read the syllabus. (nothing to submit)
+1(answer). Done.
+
+
+2- Answer the following questions and upload a .txt file (using notepad or another app that creates ascii files) with the answers under "Lab 1 submission" with the following:
+2(answer). Done.
+
+
+a. What is the proper subject to be used when submitting email to your instructor?
+a(answer). Subject line should be: CS140U online - Kirby Campbell - My Topic
+
+
+b. If you are submitting late assignments, D2L dropbox will be closed. Where do you find copies of the assignments and what is the penalty for late submission?
+b(answer). The assignments can be found under the Assignments Tab in D2L and the penalty is that the assignment will be worth 50% of its original value if turned in late.
+
+
+c. What are the lab hours this term for our class?
+c(answer). The Lab hours are Wednesdays from 7pm-9pm.
+
+d. If you can't login to our Linux system what could be reason?
+d(answer). Possibly entered my pcc.edu email address or G# incorrectly. 
+
+e. What is the difference between Unix/Linux?
+e(answer). They are essentially the same, except for that LINUX is free while UNIX is not. 
+
+Under the discussion board topic "Your Introduction" post the following:
+
+a. What is your major and why are you taking this course.
+a. Posted on Discussions - Psychology and Computer Science Double Major
+
+b. If you work and do not mind sharing it with the class please let us know (again, only if you feel comfortable sharing this information)
+b. Just a student for now, hopefully fullstack web dev in March 2019.
+
+c. If you have/do work with Linux/Unix what is your favorite distribution.
+c. I've only played with Ubuntu a bit.
+
+d. Anything else that you would like to share with the class.
+d. From my post: Hello Everybody,  My name is Kirby Campbell.  I'm originally from Louisiana, and am really enjoying living in Portland and going to PCC now.  I just completed a 10 month Full stack web developer bootcamp, and aim to apply for jobs in the area starting in March (after I finish putting together a solid skills resume).  I eventually plan to transfer from PCC to PSU and graduate in both Psychology and Computer Science.  I think the two subjects work together fantastically, and likely will merge even more in the future. 
+
+Experience wise, I've got an intermediate understanding of Ruby, Javascript, SQL, and Html/Css with a basic understanding of C++. 
+
+I've thus far taken CS161, and was aiming to take CS162 this quarter until I realized I needed CS140U first in order to move forward.  So, I'm excited to learn some of the foundations of Linux and Unix with all of you this quarter!

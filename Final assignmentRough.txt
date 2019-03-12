@@ -1,0 +1,265 @@
+#!/bin/bash
+
+##################################################
+# Kirby Campbell
+# 11 Mar 2019
+# Menu of activities for user to choose from
+# WMorales CS140U Assignment 7
+##################################################
+
+user_response = "0"  # initialize user_response to an unused char so loop will run
+clear
+
+until [ "$user_response" = "9" ] # 9 will exit program / Loops until 9 is pressed
+        do # Do the following each time user_response is anything but 9
+                clear
+                echo
+                echo "###############################################################"
+                echo "Welcome to Kirby's Main Menu"
+                echo
+                echo "Choose from the following items: "
+                echo " 1-- List of Users currently Logged in "
+                echo " 2-- Display a calendar for a specific month and year "
+                echo " 3-- Display Current Directory Path "
+                echo " 4-- Change Directory "
+                echo " 5-- Print long listing of visible files in Current Directory "
+                echo " 6-- Display Current Date, Time, and Calendar "
+                echo " 7-- Start vi Editor for File or Create file "
+                echo " 8-- Email File to a user"
+                echo " 9-- Exit this program "
+                echo " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ "
+                echo
+                echo "  ~ Make your selection: ~ "
+                echo
+                read -n1 user_response # Program waits for user's key press
+        ################################################################
+
+                case $user_response in # Begins user input case outcomes
+
+        ###############################################################
+
+                1) # When 1 is pressed - Print list of Users currently logged in
+                        clear
+                        echo "You've chosen to Print a list of Users currently logged in!"
+                        echo
+                        echo "Logged in Users: "
+                        who | more # Who lists all users currently logged on & more gives expanded info on them
+                        echo
+                        echo "Back to Main Menu? Press any key: "
+                        read -n1 # Waits for user input to return to main menu
+                        ;;
+
+        ################################################################
+
+                2) # When 2 is pressed  - Take in User month and year variables and output the calendar of those
+                        clear
+                        echo -n "To see the month of a certain years calendar, please answer two questions..."
+                        echo
+                        echo -n "Enter the month you would like to search <enter a number from 1-12>" # Notifies User of Protection against numbers outside of 1-12 range.
+                        echo
+                        read month #Assigns month to the number entered by User
+                        echo
+
+                        until [ "$month" -ge "1" ] && [ "$month" -le "12" ] # Checks to make sure month variable is >= 1 and <= 12, loops until true
+                        do
+                                echo "Month Out of range, please enter a number between 1-12"  # Reprompts for month
+                                read month # Assigns month again
+                                echo
+                        done
+
+                        echo -n "Enter the year you would like <enter a number between 1950-2115>" # Notifies User of protection against numbers outside of 1950-2115 range
+                        echo
+                        read year  # Assigns year to the number entered by the user
+                        echo
+
+                        until [ "$year" -ge "1950" ] && [ "$year" -le "2115" ] # Checks to make sure year variable is >= 1950 and <= 2115, loops until true
+                        do
+                                echo "Year Out of range, please enter a number between or including 1950-2115"  # Reprompts for year
+                                read year # Assigns year again
+                                echo
+                        done
+                        cal "$month" "$year" # Outputs the calendar of the user's chosen month of the user's chosen year
+                        echo
+                        echo "Back to Main Menu? Press any key: "
+                        read -n1 # Waits for user input to return to main menu
+                        ;;
+
+        ################################################################
+
+                3) # When 3 is pressed - Print the Working Directory's name
+                        clear
+                        echo "You've chosen to print the current working directory name! "
+                        echo
+                        pwd # pwd outputs the current working directory's name
+                        echo
+                        echo "Back to Main Menu? Press any key: "
+                        read -n1 # Waits for user input to return to main menu
+                        ;;
+        ################################################################
+
+                4) # When 4 is pressed - Change the current working directory
+                        clear
+                        echo " You've chosen to Change the current working directory! "
+                        echo
+                        echo "Enter Directory: "
+                        read newDirectory # Waits for user input and assigns the directory entered to newDirectory variable
+                        if [ -d "$newDirectory" ] # If newDirectory is a directory
+                                then
+                                        cd "$newDirectory" # Changes working directory to entered directory
+                                        pwd # Shows Current Directory
+                        elif [[ "$newDirectory" == "~" ]] || [[ "$newDirectory" == "$HOME" ]] || [[ "$newDirectory" == "HOME" ]] #If user enters ~ or $HOME directory will change to Home and notify user
+                                then
+                                        echo "Home Directory Requested"
+                                        echo
+                                        eval cd $newDirectory  #Sets directory to home
+                                        echo "Current working Directory is now your HOME!"
+                                        pwd # Shows Current Directory
+                        elif [ $# -eq 0 ] #If the user enters nothing
+                                then
+                                        echo "Invalid...Current Directory now set to Home."
+                                        cd #Sets current directory to home
+                                        pwd #Shows Current Directory
+                        else #Catch all - if nothing else works above
+                                echo "Doesn't Exist, Current Directory now set to Home."
+                                cd #Sets current directory to home
+                                pwd #Shows current directory
+                        fi # End of if statement
+                        echo "Back to Main Menu? Press any key: "
+                        read -n1 # Waits for user input to return to main menu
+                        ;;
+
+        ###############################################################
+
+                5) # When 5 is pressed - Print Files in Current Working Directory
+                        clear
+                        echo " You've chosen to print the contents of the current working diectory! "
+                        echo
+                        ls -l | more # ls outputs the list of all items in the current working directory
+                        echo "Back to Main Menu? Press any key: "
+                        read -n1 # Waits for user input to return to main menu
+                        ;;
+
+        ################################################################
+                6) # When 6 is pressed - Print Current Date and Time
+                        clear
+                        echo "You've chosen to print the Current Date and Calendar!"
+                        echo
+                        echo "Current Date & Time: "
+                        date # Outputs the current date and Time
+                        echo
+                        echo "Current Calendar: "
+                        cal  #Outputs the current calendar
+                        echo
+                        echo "Back to Main Menu? Press any key: "
+                        read -n1 # Waits for user input to return to main menu
+                        ;;
+
+        ################################################################
+
+                7) # When 7 is pressed - Open or Create Vi File in Editor
+                        clear
+                        echo "You've chosen to open a file in vi editor"
+                        echo
+                        echo "Enter the file name or path you would like to open (For example: sample.txt or /home/student/your.name/sample.txt): "
+                        echo
+                        read file #Reads user input and assigns it to variable named file
+                        if [ -f "$file" ] && file --mime $file | grep -q 'binary' #If file is a true file and of type 'binary' - found using grep... do the following:
+                                then
+                                        echo "Error, no binary files allowed!"
+                                        sleep 1 # Let user see above message
+                        elif [ -d "$file" ] && file --mime $file | grep -q 'directory' #If file is of type directory - found using grep... do the following:
+                                then
+                                        echo "Error, no directories allowed!"
+                                        sleep 1 # Give user 1 second to see above message
+                        elif [ -f "$file" ] && file --mime "$file" | grep -q 'text'  #If file is a true file and of type 'text' - found using grep... do the following:
+                                then
+                                        echo "Legit File! Opening..."
+                                        sleep 1 #Lets user see this message above.
+                                        vi "$file" #Opens file in vi editor
+
+                        else #Catch all within if statement if file wasn't a text, binary, or directory type - then it creates it and opens in vi editor.
+                                echo "Creating file..."
+                                sleep 1 #Gives user a second to see this message
+                                eval vi $file #Creates a file named as the user entered and opens it in vi editor
+                        fi #End of if statement
+                        echo
+                        echo "Back to Main Menu? Press any key: "
+                        read -n1 #Waits for user input to return to main menu
+                        ;;
+
+        #################################################################
+
+                8) # When 8 is pressed - Send an Email & Check for protections
+                        clear
+                        echo "~~ Email Composition Program ~~ "
+                        echo
+                        echo -n "Enter your Email subject and press <enter>: "
+                        read email_subject # Waits for user to enter email subject
+                        echo
+
+                        echo -n "Enter your recipient's address then press <enter>: "
+                        read email_address # Waits for user to enter email address
+                        echo
+                        if  grep -c $email_address /etc/passwd > 0  #If user entered an email address that is in the system - continue... (found email address in system by grepping /etc/passwd for the email_address variable, returns true if something longer than 0 characters is found)
+                                then
+                                        echo "$email_address found in system!"
+                        else
+                                echo "User not found, returning to main menu..."
+                                sleep 1
+                                continue
+                        fi  # End of If loop = email_address is valid and in the system
+                        echo
+                        echo -n "Attach file by entering file path(For Example: sample.txt or /home/student/your.name/filename) and press <enter>: "
+                        read email_attach # Waits for user to attach a file
+                        until [ -f "$email_attach" ] && file --mime "$email_attach" | grep -q 'text' #Until attachment is a true file of type 'text' - found using grep... do the following until that is true...
+                                do
+                                if [ -f "$email_attach" ] &&  file --mime $email_attach | grep -q 'binary' #If attachment is a true file and of type 'binary' - found using grep... do the following:
+                                        then
+                                                echo "Error, no binary files allowed, please reenter filename or path: "
+                                                read email_attach #Wait for user to input filePath
+                                                echo
+                                elif [ -d "$email_attach" ] && file --mime $email_attach | grep -q 'directory' #If attachment is a directory, tell the user they are not allowed and reprompt for file
+                                        then
+                                                echo "Error, no directories allowed, please reenter filename or path: "
+                                                read email_attach #Wait for user to input filePath
+                                                echo
+                                else #If File didn't exist at all
+                                        echo "Error, no file found. please reenter filename or path: "
+                                        read email_attach #Wait for user to input filePath
+                                        echo
+                                fi #End of if statement
+                        done #End of Until statement... Means email_attach is now valid for sending
+
+
+                        mail -s "$email_subject" "$email_address" < "$email_attach" # Uses mail command to send attachment to the email address with the given subject - by using each variable that the user typed into
+                        clear
+                        echo "Your message has been sent to $email_address successfully! "
+                        echo
+                        echo "Back to Main Menu? Press any key: "
+                        read -n1 #Waits for user input to return to main menu
+                        ;;
+
+        ################################################################
+
+                9) # When 9 is pressed - Close the Program
+                        clear
+                        echo "Shutting Down this Program" #Friendly Ending sequence
+                        sleep 1
+                        echo "GoodBye Mr/Ms User!"
+                        sleep 1
+                        break;; # Break leaves the program altogether
+
+        ################################################################
+
+                *) # When any key that is not 1-9 is pressed - do the following
+                        clear
+                        echo "Invalid Menu Option."
+                        echo "Please choose a valid menu option! "
+                        sleep 1
+                        ;;
+
+
+                esac # esac is the end of a case block
+        done # end of loop
+
+

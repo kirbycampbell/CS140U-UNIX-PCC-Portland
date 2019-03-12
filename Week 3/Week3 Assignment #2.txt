@@ -1,0 +1,44 @@
+Kirby Campbell
+January 21, 2019
+CS 140U
+Assignment 2   -  Week 3
+
+1. What vi command allows you to move to the first line in the current buffer (document), not first line of the current page?
+
+1G
+
+2. What command allows you to move to the last line in the buffer(document), not the last line of the current page?
+
+G
+
+3. What file in your home directory allows you to customize your vi environment variables permanently?
+
+~/.vimrc 
+
+4. List the properly named parts of a valid e-mail address, briefly describe each one, and then give 3 examples of complete e-mail addresses. username@hostname.domain_name... ,
+
+Username is the unique name assigned or chosen by the user themself.
+Hostname is the identifying address of the hosting server where the email address resides.
+Domain Name is the basic address where the Hostname resides, since the same hostname can lead to different addresses if .us, .io, .org, or .com.
+jkirbycampbell@gmail.com, krbycampbell@yahoo.com, mistermisterson@spankz.us
+
+5. What are the two general modes of operations you can perform in vi?
+
+INSERT and COMMAND
+
+6. Briefly describe what the SMTP standard protocol format for an e-mail message is.
+
+The Simple Mail Transfer Protocol (SMTP) is an internet standard for email transmission.  Mail transfer agents and servers use SMTP to send and receive email on TCP port 25.  It is a connection-oriented, text-based protocol  where a mail sender communicates with a mail receiver through command strings.
+
+7. Briefly describe the difference between the POP and IMAP e-mail protocols.
+
+Both POP and IMAP are protocols for downloading messages from email servers. They differ in that IMAP syncs with mails servers, so any changes made locally in a mail client are reflected on the server.  POP, on the other hand, is not synced, meaning that once the email is downloaded from the server, it is deleted from the server.  IMAP keeps a copy on the server, and can be marked as read and still stored.
+
+8. What does the MIME attachment standard for e-mail deal with?
+
+The Multipurpose Internet Mail Extension (MIME) allows emails to include non text attachments, including audio, video, graphics, and more.
+
+9. List and briefly describe some common functions found in UNIX e-mail systems.
+
+Generally, once logged into your UNIX system, you create files by typing $vim nameOfFile .  To send that file as an email you can type $mail -s "subject of email to send" username@hostname.domain_name  .
+That will send the email to the desired user.  To access your own emails, type $pine , and press into the inbox to view the emails.  This email system overall includes a cli, a text editor called vim, and an email program called pine. 

@@ -1,0 +1,36 @@
+Kirby Campbell
+January 19, 2019
+Lab 3 Part 2
+
+
+12dw 
+
+12dw deletes 12 words starting from the cursor position.
+
+5dd 
+
+5dd deletes five lines starting with the current line.
+
+12o 
+
+12o opens 12 new lines for text below the cursor position.
+
+5O 
+
+5O opens 5 new lines for text above the cursor position.
+
+c5b 
+
+c5b changes from cursor position to beginning of 5th previous blank-delimited word, and switches into input mode so that you type in that newly created space.  Essentially it deletes backwards 5 words and lets you type starting there.
+
+:5,12d 
+
+:5,12d deletes 8 lines, including the line the cursor is on.  It starts you at the beginning of the next line.
+
+12G 
+
+12G moves your cursor to the twelfth line of the file
+
+5yy
+
+5yy copies 5 lines starting from the current line.  Copies is also called yank ( in the textbook).

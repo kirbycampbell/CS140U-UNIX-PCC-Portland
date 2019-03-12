@@ -1,0 +1,45 @@
+John Kirby Campbell - Partnered with Christabel Escarez
+February 6, 2019
+Lab 5 Unix CS140U - Morales
+::::::::::::::
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+1)  Using awk, write the command that would print the line that contains the word "selected". This file has a lot of junk in it. So, you are just searching for the lines that contain the word “selected”. Your awk script will look into the file called longfile and once it finds all the lines that contain the word "selected" it will display the line. The output should be:
+
+YOUR AWK COMMAND: awk '/selected/ {print}' longfile
+server, or at least to a "randomly" selected one of the servers covering
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+2) Write the command that would find all lines that have an email address and place a label email = before the line in the file longfile
+
+YOUR AWK COMMAND: awk '/From:/||/To/||/Cc/ {print "email= ", $0}' longfile
+email=  From: "Linder, Jann/WDC" <jlinder@CH2M.com>
+email=  jiTo: Mr Arlington Hewes <tpcadmin@info.tpc.int>
+email=  Cc: "tpc-rp@info.tpc.int" <tpc-pc@info.tpc.int>
+email=  > From: Mr Arlington Hewes [SMTP:tpcadmin@info.tpc.int]
+email=  > To:   tpc-rp@info.tpc.int
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+3)       Write the awk command that would show the user wmorales (or yourself) that is online (you have to use a pipe)
+
+YOUR AWK COMMAND: w | awk '/kirby.*/ {print}'
+kirby.ca pts/101  97-120-218-132.p 19:04    1.00s  0.12s  0.01s w
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+4)       finger or  who the users on our system that have the letter r in their first name, or last name, but nowhere else. Note also that the r can be r or R.
+
+YOUR AWK COMMAND: who | awk '$1 ~ /[Rr]/ {print}'  
+dan.wright1 pts/5        2019-02-06 19:20 (c-73-164-198-99.hsd1.or.comcast.net)
+rob.johnson1 pts/8        2019-02-06 17:44 (c-24-22-120-240.hsd1.or.comcast.net)
+damon.sawyer pts/9        2019-02-06 15:17 (cpe-172-75-127-73.carolina.res.rr.com)
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+5)       (3 points - easy) 
+from the file called winelist extract a list of wines that cost less than $7.00
+
+YOUR AWK COMMAND:  awk '$2 < 7.00' winelist
+1977    5.99    Charles Krug
+1967    6.75    Alexander Valley
+1977    6.99    Franciscan
+1981    5.44    Cheap wine
+1999    4.99    Madeira wine
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::

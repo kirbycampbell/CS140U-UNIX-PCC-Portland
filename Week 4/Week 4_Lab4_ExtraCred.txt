@@ -1,0 +1,73 @@
+Kirby Campbell
+January 28, 2019
+Lab 4
+Partner: Christabel Escarez
+
+	   Extra Credit Lab Partner Assignment
+		   
+
+	:::::::::::::::::::::::::::::::::::::::::::
+	    Receiving a file from another User
+	:::::::::::::::::::::::::::::::::::::::::::
+
+Step1. 
+Login to the Unix system via putty or desired program. 
+You are now in your home directory.
+
+Step2.
+Change the permissions for the overall user folder, that
+way another user can enter to move a file.
+Type "chmod g+rwx /home/student/kirby.campbell"
+
+Step3.
+Create a temp folder for another user to put files into.
+Type "mkdir temp" from the home directory.
+
+Step4.
+Change permissions to your temp folder.
+Type "chmod g+rwx temp"
+
+Step5.
+Type "ls -l" to see the permissions of all files within your home folder. 
+temp should show drwxrwxrwx which means other users in 
+your group now have the ability to read and write anywhere in your directory.
+
+	:::::::::::::::::::::::::::::::::::::::::::
+	Giving a user access to another user's file
+	:::::::::::::::::::::::::::::::::::::::::::
+
+Step1. 
+Login to the Unix system via putty or desired program. 
+You are now in your home directory.
+
+Step2. 
+First create a file to share. 
+For Example type "vim myFile" press "i" and then type your text. 
+Press "Escape" and then "Shift+ZZ" to save and close the vim text editor.
+
+Step3. 
+Create a directory named temp by typing "mkdir temp" in your home directory.
+
+Step4. Move your "myFile" to your temp directory by typing "mv myFile temp". 
+now type "cd temp" to enter the temp directory.
+
+Step5. To check the current permissions on your file type "ls -l myFile" 
+- which should return 
+"-rw------- 1 user.name students 26 Jan 28 11:48 myFile" in the CLI of putty.
+
+Step6. Change the permissions of the file so 
+that UserB can read and write to the file. 
+Type "chmod g+rwx myFile" . Type "ls -l myFile" to see the new file permissions.
+
+Step7. 
+If UserB has already created their accessible temp folder, 
+it is time to hardlink the file to their temp folder.
+From within the temp folder:
+Type "ln myFile /home/student/christabel.escarez/cs140u/temp/myFile"
+
+Step8.
+Christabel (UserB) can now login, cd into their temp folder, and 
+type "ls -l" to see the permissions of the file linked there.
+Or She can cat myFile or vim myFile to edit it.
+
+

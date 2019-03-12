@@ -1,0 +1,59 @@
+1) Briefly explain what an Operating System is.
+
+Answer: Operating systems are low-level software containing two main parts, the kernel and system programs.  The kernel allocates resources like CPU cycles, disk space, and memory while the system programs include device drivers, utility programs, libraries, shells, configuration files and scripts, applications, servers, and documentation. 
+
+2) What does it mean to say, "UNIX is a multi-user Operating System?"
+
+Answer: UNIX can handle 1 to over 1000 users, each simultaneously running different programs.  This leads to cheaper per-user-cost since no one user can use all of a computers resources 100% of the time.
+
+3) What does it mean to say, "UNIX is a multi-tasking Operating System?"
+
+Answer: Unix can run multiple jobs and applications at the same time, in the foreground or background.  One user can be doing multiple jobs at the same time.
+
+4) What does it mean to say, "UNIX is a portable Operating System?"
+
+Answer: UNIX can run on many different machines since it is written in C programming language.
+
+5) Why is UNIX portable?
+
+Answer: It is portable because it is written in C programming language which is a higher-level machine independent programming language.
+
+6) What are the three major components of any UNIX system (UNIX as an Operating System)?
+
+Answer: The Kernel, The Shell, and The File system which includes it's tools and applications.
+
+7) What are the names of the two prominent versions of UNIX, according to our text book?
+
+Answer: The Berkely Software Distribution (BSD) and Unix System V (SVR4) are the two prominent versions of UNIX mentioned on page 3 of the text book.
+
+8) Who (names) of people who designed the original UNIX?
+
+Answer: Ken Thompson and Dennis Ritchie at Bell Labs along with Brian Kernighan, Douglas McIlroy and Joe Ossanna.
+
+9) What are the two different ways in which a user can interact (interface/work) with UNIX?
+
+Answer: A user can interact with UNIX either by command line interface(CLI) or Graphical User Interface (GUI).
+
+10) What is a UNIX account?
+
+Answer: It is a User's shell account which provides file protection and ownership for that user and the user's files.
+
+11) What is the username of the most powerful account in a UNIX system (the superuser)?
+
+Answer: The root user account is the most powerful account in a UNIX system, it is called root.
+
+12) What does it mean to "login" to UNIX? What steps do you usually follow for this procedure?
+
+Answer: It means that you are logging into your own private shell of Unix containing your own files. Usually, the user will open a terminal or terminal emulator which will prompt the user for a login user id and password.  Once entered correctly, press enter and it should log you in via ssh, which keeps your info secure. Once logged in, the system should indicate that it is ready for commands.   
+
+13) What is a Shell?
+
+Answer: A shell is a command interpreter which acts as the interface betwen the user and the operating system. The user enters commands to communicate with the computer.
+
+14) What is a login Shell?
+
+Answer: A login shell is the initial process that takes place once logged in with a user Id. The terminal will prompt you to login - in which you will type in your user id and password. 
+
+15) What has to be done to change the terminal emulation if it is not correct?
+
+Answer: If the user id or password is incorrect when logging in, re enter them correctly.  If the terminal does not display the login prompt, check to make sure the terminal is on and press return key a few times  or press ctl+q.  p.27

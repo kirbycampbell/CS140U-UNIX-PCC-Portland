@@ -1,0 +1,15 @@
+Comp Sci Notes Week 7 Jobs Processes
+
+To run a process in the background - type "&" at the end of a command line.
+
+Suspend a foreground process by typing ctrl-z.
+
+To bring a background job to foreground type "fg"
+If there are more than one background jobs type "fg 1" or "% 1" to bring that number process to foreground. 
+
+To stop a background process type "kill 1" to kill that numbered process. 
+
+Type "jobs" to list all jobs.
+
+Type "ps -f" to list all processes. 
+
