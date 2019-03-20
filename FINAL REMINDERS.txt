@@ -1,0 +1,88 @@
+CSU 140U MY REMINDERS:::::::
+
+Login Shell- first shell that displays a a prompt when you log in on a system from system, virtual, remotely, or another program.
+------ Logging in first executes /etc/profile  - page 288 has more. 
+
+Redirecting standard output - $ cat y | tr "[a-z]" "[A-Z]"      - this turns whatever is stored in y into all caps!
+
+Redirecting error and standard output -  $ cat x y &> hold  - In this &> redirects standout and standerror to a single file. 
+
+chmod - make a file executable.  example: $ chmod +x filename.sh  
+
+Run an executable file by type the filename like so----  ./myprogram.sh  or whatever its called
+
+Comments start with a # mark.  # This is a comment
+
+Running programs in the background -- like this - d & e & f  - d and e are running in background, not f.  must have & after.
+
+0 is true, 1 is false.
+
+Group commands like this -- $ (true || false) && false
+
+Move job to foreground with $ fg nameOfFile
+
+Move job to background with by first pressing ctrl+z then use $ bg
+
+Function  layout  -  called by typing $ whoson
+$ function whoson () {
+	date
+	echo "Users currently logged On"
+	who
+}
+
+if...then...elif...else
+
+Start a bash program with #!/bin/bash
+
+To read user input and assign to a variable --- read word1
+To use the new user variable do - if [ "$word1" -eq "something" ]
+					then
+						echo "Your guessed the computer word!"
+				  fi
+
+CASES in Bash scripting is like::
+
+case "$letter" in
+	a|A)
+		echo "You entered A"
+		;;
+	b|B)
+		echo "You entered B"
+		;;
+	*)
+		echo "Nothing matched"
+		;;
+esac
+
+gawk examples:
+
+$ gawk '{print length, $0}' cars | sort -n
+21 bmw 325i 1985 115 450
+22 plym fury 1970 73 2500
+
+pwd - working directory show
+
+copy a file by - $ cp file1 file2    - this copies file1 into file2
+to move a file - $ mv file1 direc1  - moves file1 into the directory chosen
+
+make directory - mkdir directory47
+make file - touch file48
+
+add a file onto another - $ cat pear >> orange    - this adds whatever is in pear onto the end of orange.
+
+tr command - is a translate.  used like - $ cat abstract | tr abc ABC   - this turns all a or b or c letters to capitals!
+
+kirby.campbell@syccuxas01:~> cat sampleFile | tr i o
+Lone 1 os sweet.
+Lone 2 os botter.
+
+Permissions::::
+chmod 777 file3   - owner, group and others can now read, write, and execute
+
+linking a file -- $ ln file_a file_b   - they are now tied together!
+
+remove a file by - $rm file1
+remove directory by - $rmdir directory1
+
+vim movement - j=down , k=up, h=left, l=right
+
